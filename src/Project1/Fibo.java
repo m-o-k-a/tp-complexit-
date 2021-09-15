@@ -9,7 +9,7 @@ public class Fibo {
         /*for(int i = 0; i<maxValue; i++) {
             System.out.println(fiboRec.fiboIter(i));
         }*/
-        System.out.println(fiboRec.fiboExpoMatrix(5));
+        System.out.println(fiboRec.fiboExpoMatrix(6));
     }
 
     public double fiboRec(int n) {
@@ -33,13 +33,12 @@ public class Fibo {
     }
 
     public double fiboExpoMatrix(int n) {
-        n--;
         int[][] result = {{0},
                           {1}};
         int[][] base = {{0, 1},
                         {1, 1}};
         //power product to n-1
-        if(n%2 == 0) {
+        if(n%2 != 0) {
             int[][] baseTemp = base.clone();
             while(n != 1) {
                 base = squareMatrixProduct(base, base);
@@ -52,9 +51,9 @@ public class Fibo {
                 n /= 2;
             }
         }
-        System.out.println(base[0][0]+" "+base[0][1]+"/"+base[1][0]+" "+base[1][1]);
         result = columnMatrixProduct(base, result);
-        return result[0][1];
+        System.out.println(result[0][0]+" "+result[1][0]);
+        return result[1][0];
     }
 
     private int[][] columnMatrixProduct(int[][] a, int[][] b) {
