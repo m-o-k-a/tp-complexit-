@@ -1,24 +1,20 @@
 package Project1;
 
-import java.util.Arrays;
-
+/**
+ * Fibo (for Fibonacci Suite) is the class featuring 3 implementations of the fibonacci algorithm:
+ * - Recursive (rec)
+ * - Iterative (iter)
+ * - Matrix exponentiation (expoMatrix)
+ */
 public class Fibo {
-    public static void main(String[] args) {
-        Fibo fiboRec = new Fibo();
-        final int maxValue = 10;
-        /*for(int i = 0; i<maxValue; i++) {
-            System.out.println(fiboRec.fiboIter(i));
-        }*/
-        System.out.println(fiboRec.fiboExpoMatrix(6));
-    }
 
-    public double fiboRec(int n) {
+    public double rec(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
-        else return (fiboRec(n-1) + fiboRec(n-2));
+        else return (rec(n-1) + rec(n-2));
     }
 
-    public double fiboIter(int n) {
+    public double iter(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
         double f0 = 0;
@@ -32,57 +28,74 @@ public class Fibo {
         return fn;
     }
 
-    public double fiboExpoMatrix(int n) {
-        int[][] result = {{0},
-                          {1}};
-        int[][] base = {{0, 1},
-                        {1, 1}};
-        //power product to n-1
-        if(n%2 != 0) {
-            int[][] baseTemp = base.clone();
-            while(n != 1) {
-                base = squareMatrixProduct(base, base);
-                n /= 2;
+    private double[][] matrixProduct(double[][] a, double[][] b) {
+        //we assert that both k are checked
+        //m1[i][k] * m2[k][j]
+        //result[i][j]
+        int kSize = b.length;
+        int iSize = a.length;
+        int jSize = b[0].length;
+        double result[][] = new double[iSize][jSize];
+        for(int i=0; i<iSize; i++){
+            for(int j=0; j<jSize; j++){
+                result[i][j] = 0;
+                for(int k=0; k<kSize;k++) {
+                    result[i][j] += a[i][k] * b[k][j];
+                }
             }
-            base = squareMatrixProduct(baseTemp, base);
+        }
+        return result;
+    }
+
+/* iterative
+    public double expoMatrix(int n) {
+        if(n == 0) return 0;
+        if(n == 1) return 1;
+        double[][] result = {{0}, {1}};
+        double[][] base =   {{0, 1},
+                          {1, 1}};
+        //get base^n
+        //issue: if n = no, its result will be in the top row of the final result
+        //issue: we also know that for even n, x^n = (x^2)^(n/2)
+        //and if not even n, x^n = x*x^(n-1) = x*(x^2)^(n-1/2)
+        while (n != 1) {
+            if(n%2 == 0) {
+                base = matrixProduct(base, base);
+                n = n/2;
+            } else {
+                base =  matrixProduct(base, expoMatrixRec(n-1, base));
+            }
+        }
+        base = expoMatrixRec(n, base);
+        result = matrixProduct(base, result);
+        return result[0][0];
+    }
+
+    private double[][] expoMatrixRec(int n, double[][] base) {
+        return new double[2][2];
+    }
+ */
+ public double expoMatrix(int n) {
+        if(n == 0) return 0;
+        if(n == 1) return 1;
+        double[][] result = {{0}, {1}};
+        double[][] base =   {{0, 1},
+                          {1, 1}};
+        //get base^n
+        //issue: if n = no, its result will be in the top row of the final result
+        //issue: we also know that for even n, x^n = (x^2)^(n/2)
+        //and if not even n, x^n = x*x^(n-1) = x*(x^2)^(n-1/2)
+        base = expoMatrixRec(n, base);
+        result = matrixProduct(base, result);
+        return result[0][0];
+    }
+
+    private double[][] expoMatrixRec(int n, double[][] base) {
+        if(n == 1) return base;
+        if(n%2 == 0) {
+            return expoMatrixRec(n/2, matrixProduct(base, base));
         } else {
-            while(n != 1) {
-                base = squareMatrixProduct(base, base);
-                n /= 2;
-            }
+            return matrixProduct(base, expoMatrixRec(n-1, base));
         }
-        result = columnMatrixProduct(base, result);
-        System.out.println(result[0][0]+" "+result[1][0]);
-        return result[1][0];
-    }
-
-    private int[][] columnMatrixProduct(int[][] a, int[][] b) {
-        int[][] p = {{1, 0},
-                {0, 1}};
-        for(int i = 0; i<a.length; i++) {
-            for(int j = 0; j<a.length; j++) {
-                int r = 0;
-                for(int k = 0; k<b.length; k++) {
-                    r += a[i][k] * b[k][0];
-                }
-                p[i][j] = r;
-            }
-        }
-        return p;
-    }
-
-    private int[][] squareMatrixProduct(int[][] a, int[][] b) {
-        int[][] p = {{1, 0},
-                     {0, 1}};
-        for(int i = 0; i<a.length; i++) {
-            for(int j = 0; j<a.length; j++) {
-                int r = 0;
-                for(int k = 0; k<b.length; k++) {
-                    r += a[i][k] * b[k][j];
-                }
-                p[i][j] = r;
-            }
-        }
-        return p;
     }
 }
