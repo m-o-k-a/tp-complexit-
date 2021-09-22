@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TP-COMPLEXITE.iml" filepath="$PROJECT_DIR$/TP-COMPLEXITE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tp-complexit-.iml" filepath="$PROJECT_DIR$/.idea/tp-complexit-.iml" />
     </modules>
   </component>
 </project>
