@@ -47,34 +47,6 @@ public class Fibo {
         return result;
     }
 
-/* iterative
-    public double expoMatrix(int n) {
-        if(n == 0) return 0;
-        if(n == 1) return 1;
-        double[][] result = {{0}, {1}};
-        double[][] base =   {{0, 1},
-                          {1, 1}};
-        //get base^n
-        //issue: if n = no, its result will be in the top row of the final result
-        //issue: we also know that for even n, x^n = (x^2)^(n/2)
-        //and if not even n, x^n = x*x^(n-1) = x*(x^2)^(n-1/2)
-        while (n != 1) {
-            if(n%2 == 0) {
-                base = matrixProduct(base, base);
-                n = n/2;
-            } else {
-                base =  matrixProduct(base, expoMatrixRec(n-1, base));
-            }
-        }
-        base = expoMatrixRec(n, base);
-        result = matrixProduct(base, result);
-        return result[0][0];
-    }
-
-    private double[][] expoMatrixRec(int n, double[][] base) {
-        return new double[2][2];
-    }
- */
  public double expoMatrix(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
