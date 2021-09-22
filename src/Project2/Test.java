@@ -14,6 +14,7 @@ public class Test {
         DensityZone densityZone = new DensityZone();
         System.out.println(densityZone.isDensityZone(graph, new int[]{1, 2, 4, 5}));
         System.out.println(densityZone.isDensityZone(graph, new int[]{0, 1, 4, 3}));
-        System.out.println(densityZone.findDensityZone(graph, 2));
+        System.out.println(densityZone.findDensityZone(graph, 4));
+        System.out.println(densityZone.findMaxDensityZone(graph));
     }
 }

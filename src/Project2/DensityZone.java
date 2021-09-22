@@ -56,7 +56,18 @@ public class DensityZone {
         return densityZone;
     }
 
-
+    public ArrayList<Integer> findMaxDensityZone(Graph g){
+        int max = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i< g.nmax ; i++){
+            ArrayList<Integer> candidateZone = findDensityZone(g,i);
+            if (candidateZone.size()>max){
+                max = candidateZone.size();
+                result = candidateZone;
+            }
+        }
+        return result;
+    }
 }
 
 /*
