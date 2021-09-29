@@ -8,7 +8,8 @@ import java.util.List;
 public class DensityZone {
 
     /**
-     * complexity: theta(|subsummits|**)
+     * complexity: theta(|subsummits|^^2)
+     * worse case theta(n^^2)
      * @param subSummits
      * @return
      */
@@ -28,6 +29,7 @@ public class DensityZone {
         return true;
     }
 
+
     public boolean isDensityZone(Graph g, ArrayList<Integer> subSummits) {
         //todo check if all subSummits are inside g
         for(int i =0; i<subSummits.size(); i++) {
@@ -44,17 +46,21 @@ public class DensityZone {
         return true;
     }
 
+    /**
+     * Complexity : theta(n^^3)
+     */
     public ArrayList<Integer> findDensityZone(Graph g, int start_summit) {
         ArrayList<Integer> densityZone = new ArrayList<>();
         densityZone.add(start_summit);
-        for(int i = 0; i<g.nmax; i++){
+        for(int i = 0; i<g.nmax; i++){ //O(n)
             if(g.matrix[start_summit][i] == 1) {
                 densityZone.add(i);
-                if (!isDensityZone(g,densityZone)) densityZone.remove(densityZone.indexOf(i));
+                if (!isDensityZone(g,densityZone)) densityZone.remove(densityZone.indexOf(i)); //O(n^^2)
             }
         }
         return densityZone;
     }
+
 
     static ArrayList<int[]> subsets(ArrayList<Integer> set_list) {
         int[] set = new int[set_list.size()];
@@ -78,7 +84,12 @@ public class DensityZone {
     }
 
 
-
+    /**
+     * Complexitée exponentielle : on explore tous les sous-ensemble possible de sommets,
+     * soit 2^^n possibilitées, O(2^^n)
+     * @param g
+     * @return
+     */
     public ArrayList<Integer> findMaxDensityZone(Graph g){
         ArrayList<Integer> summits = new ArrayList<>();
         for (int i = 0; i < g.nmax ; i++){

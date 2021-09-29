@@ -8,6 +8,12 @@ package Project1;
  */
 public class Fibo {
 
+    /**
+     * Complexitée :  exponentiel O(2^(n))
+     *
+     * @param n
+     * @return
+     */
     public double rec(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
@@ -28,6 +34,7 @@ public class Fibo {
         return fn;
     }
 
+
     private double[][] matrixProduct(double[][] a, double[][] b) {
         //we assert that both k are checked
         //m1[i][k] * m2[k][j]
@@ -47,6 +54,9 @@ public class Fibo {
         return result;
     }
 
+    /** Fibonacci avec produit matriciel
+     * COMPLEXITY linear : O(n)
+     */
  public double expoMatrix(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
