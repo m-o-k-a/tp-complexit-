@@ -56,7 +56,55 @@ public class DensityZone {
         return densityZone;
     }
 
+    static ArrayList<int[]> subsets(ArrayList<Integer> set_list) {
+        int[] set = new int[set_list.size()];
+        for (int a=0;a<set_list.size();a++) set[a] = set_list.get(a);
+
+        int n = set.length;
+        ArrayList<int[]> subsets = new ArrayList();
+
+        for (int i = 0; i < (1<<n); i++) {
+            ArrayList<Integer> sublist = new ArrayList<>();
+            for (int j = 0; j < n; j++){
+                if ((i & (1 << j)) > 0){
+                    sublist.add(set[j]);
+                }
+            }
+            int[] subset = new int[sublist.size()];
+            for (int a=0;a<sublist.size();a++) subset[a] = sublist.get(a);
+            subsets.add(subset);
+        }
+        return subsets;
+    }
+
+
+
     public ArrayList<Integer> findMaxDensityZone(Graph g){
+        ArrayList<Integer> summits = new ArrayList<>();
+        for (int i = 0; i < g.nmax ; i++){
+            summits.add(i);
+        }
+        //COMPUTE SUBSETS
+        ArrayList<int[]> subsets = subsets(summits);
+        int result = 0;
+        int max = 0;
+        for (int i = subsets.size()-1 ; i>=0 ; i--){
+            if (isDensityZone(g, subsets.get(i))){
+                if (subsets.get(i).length > max){
+                    max = subsets.get(i).length;
+                    result = i;
+                }
+            }
+        }
+        ArrayList<Integer> r = new ArrayList<>();
+        for (int i = 0; i < subsets.get(result).length ; i++){
+            r.add(subsets.get(result)[i]);
+        }
+        return r;
+
+    }
+
+    public ArrayList<Integer> findMaxDensityIncomplete(Graph g) {
         int max = 0;
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i< g.nmax ; i++){
@@ -67,6 +115,7 @@ public class DensityZone {
             }
         }
         return result;
+
     }
 }
 
