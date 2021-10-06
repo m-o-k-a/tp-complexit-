@@ -86,7 +86,7 @@ public class DensityZone {
 
     /**
      * Complexitée exponentielle : on explore tous les sous-ensemble possible de sommets,
-     * soit 2^^n possibilitées, O(2^^n)
+     * soit 2^^n possibilitées, O(2^^n), avec n le nombre de sommets dans g
      * @param g
      * @return
      */
@@ -126,6 +126,41 @@ public class DensityZone {
             }
         }
         return result;
+
+    }
+
+    /**
+     * Marche pas encore
+     * @param g
+     * @return
+     */
+    public ArrayList<Integer> findMaxDensityIncomplete_2(Graph g) {
+        int max = 0;
+        ArrayList<Integer> denseZone = new ArrayList<>();
+        for (int i = 0;i < g.nmax;i++){
+            ArrayList<Integer> neighbors = new ArrayList<>();
+            for (int inbs = 0; inbs < g.nmax;inbs++) if (g.matrix[i][inbs] == 1) neighbors.add(inbs);
+            int[] isInDenseZone = new int[neighbors.size()];
+            for (int t = 0; t<isInDenseZone.length; t++) isInDenseZone[t] = 0;
+            for (int n=0;n < neighbors.size();n++){
+                if(isInDenseZone[n]==0){
+                    ArrayList<Integer> n_neighbors = new ArrayList<>();
+                    for (int nnbs = 0; nnbs < g.nmax;nnbs++) if (g.matrix[n][nnbs] == 1) n_neighbors.add(nnbs);
+                    for (Integer nn:n_neighbors) if (neighbors.contains(nn)) isInDenseZone[neighbors.indexOf(nn)]=1;
+                }
+            }
+            ArrayList<Integer> candidateDZ = new ArrayList<>();
+            for (int n = 0;n<isInDenseZone.length;n++){
+                if(isInDenseZone[n]==1) candidateDZ.add(n);
+            }
+            if (max < candidateDZ.size()+1){
+                max = denseZone.size()+1;
+                denseZone = candidateDZ;
+            }
+
+        }
+        System.out.printf("max :"+max);
+        return denseZone;
 
     }
 }

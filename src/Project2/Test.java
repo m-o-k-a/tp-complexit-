@@ -1,6 +1,11 @@
 package Project2;
 
 public class Test {
+    public static Graph randomGraphGen(int size, int min_nb,int max_nb){
+        //TODO
+        return null;
+    }
+
     public static void main(String[] args) {
         int[][] edges = {
                 {0, 1, 0, 1, 0, 0},
@@ -30,6 +35,7 @@ public class Test {
         System.out.println(densityZone.isDensityZone(graph, new int[]{0, 1, 4, 3}));
         System.out.println(densityZone.findDensityZone(graph, 4));
         System.out.println(densityZone.findMaxDensityZone(test));
+        System.out.println(densityZone.findMaxDensityIncomplete_2(test));
 
     }
 }
