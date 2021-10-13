@@ -1,4 +1,4 @@
-package Project2;
+package TP1.Project2;
 
 import java.util.*;
 

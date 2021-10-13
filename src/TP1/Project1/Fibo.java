@@ -1,4 +1,4 @@
-package Project1;
+package TP1.Project1;
 
 /**
  * Fibo (for Fibonacci Suite) is the class featuring 3 implementations of the fibonacci algorithm:

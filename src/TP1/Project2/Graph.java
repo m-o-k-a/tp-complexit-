@@ -1,4 +1,4 @@
-package Project2;
+package TP1.Project2;
 
 public class Graph {
     int nmax;

@@ -1,4 +1,4 @@
-package TP1;
+package TP2;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,9 +1,6 @@
-package Project2;
+package TP1.Project2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 public class DensityZone {
 
