@@ -21,7 +21,7 @@ public class DensityZone {
                 int xi = subSummits[i];
                 int xj = subSummits[j];
                 if(g.matrix[xi][xj] == 0) {
-                    System.out.println("summit "+xi+", "+xj+" not linked");
+                    //System.out.println("summit "+xi+", "+xj+" not linked");
                     return false;
                 }
             }
@@ -38,7 +38,7 @@ public class DensityZone {
                 int xi = subSummits.get(i);
                 int xj = subSummits.get(j);
                 if(g.matrix[xi][xj] == 0) {
-                    System.out.println("summit "+xi+", "+xj+" not linked");
+                    //System.out.println("summit "+xi+", "+xj+" not linked");
                     return false;
                 }
             }
@@ -107,10 +107,12 @@ public class DensityZone {
                 }
             }
         }
+
         ArrayList<Integer> r = new ArrayList<>();
         for (int i = 0; i < subsets.get(result).length ; i++){
             r.add(subsets.get(result)[i]);
         }
+        System.out.println("Meilleur Zone dense : "+ r.size() + " : " + r);
         return r;
 
     }
@@ -125,44 +127,11 @@ public class DensityZone {
                 result = candidateZone;
             }
         }
+        System.out.println(" Zone dense : "+ result.size() + " : " + result);
         return result;
-
     }
 
-    /**
-     * Marche pas encore
-     * @param g
-     * @return
-     */
-    public ArrayList<Integer> findMaxDensityIncomplete_2(Graph g) {
-        int max = 0;
-        ArrayList<Integer> denseZone = new ArrayList<>();
-        for (int i = 0;i < g.nmax;i++){
-            ArrayList<Integer> neighbors = new ArrayList<>();
-            for (int inbs = 0; inbs < g.nmax;inbs++) if (g.matrix[i][inbs] == 1) neighbors.add(inbs);
-            int[] isInDenseZone = new int[neighbors.size()];
-            for (int t = 0; t<isInDenseZone.length; t++) isInDenseZone[t] = 0;
-            for (int n=0;n < neighbors.size();n++){
-                if(isInDenseZone[n]==0){
-                    ArrayList<Integer> n_neighbors = new ArrayList<>();
-                    for (int nnbs = 0; nnbs < g.nmax;nnbs++) if (g.matrix[n][nnbs] == 1) n_neighbors.add(nnbs);
-                    for (Integer nn:n_neighbors) if (neighbors.contains(nn)) isInDenseZone[neighbors.indexOf(nn)]=1;
-                }
-            }
-            ArrayList<Integer> candidateDZ = new ArrayList<>();
-            for (int n = 0;n<isInDenseZone.length;n++){
-                if(isInDenseZone[n]==1) candidateDZ.add(n);
-            }
-            if (max < candidateDZ.size()+1){
-                max = denseZone.size()+1;
-                denseZone = candidateDZ;
-            }
 
-        }
-        System.out.printf("max :"+max);
-        return denseZone;
-
-    }
 }
 
 /*

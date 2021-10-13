@@ -1,9 +1,6 @@
 package Project2;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Test {
     public static Graph randomGraphGen(int size, int min_nb,int max_nb){
@@ -73,6 +70,29 @@ public class Test {
                 {0,0,0,0,0,0,1,0,1},
                 {0,0,0,0,0,0,0,1,0},};
 
+        int [][] test_3 = {
+                {0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,1,1},
+                {1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1},
+                {1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1},
+                {1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,0},
+                {0,1,1,1,0,1,1,0,1,0,1,1,1,1,0,1,0,1,0,1},
+                {1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+                {0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1},
+                {1,0,1,1,0,1,1,0,0,1,1,0,1,1,1,1,1,1,1,0},
+                {0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0},
+                {1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,0,1,1,1,1},
+                {0,1,1,0,1,1,1,1,1,1,0,0,0,0,1,1,0,1,0,1},
+                {1,0,0,1,1,1,1,0,1,1,0,0,1,1,1,1,1,0,0,0},
+                {1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+                {1,1,1,1,0,1,1,1,1,0,1,1,0,1,0,0,1,1,1,1},
+                {1,1,1,0,1,1,1,1,1,0,1,1,1,1,0,0,0,1,1,0},
+                {0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,0,0,1,0,0},
+                {1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1},
+                {1,1,1,1,0,1,1,1,1,1,0,0,1,1,1,1,0,1,0,1},
+                {1,1,1,0,1,0,1,0,0,1,1,0,1,1,1,0,0,1,1,0}
+        };
+
         Graph graph = new Graph(edges);
         Graph test = new Graph(test_2);
         DensityZone densityZone = new DensityZone();
@@ -80,9 +100,13 @@ public class Test {
         System.out.println(densityZone.isDensityZone(graph, new int[]{0, 1, 4, 3}));
         System.out.println(densityZone.findDensityZone(graph, 4));
         System.out.println(densityZone.findMaxDensityZone(test));
-        System.out.println(densityZone.findMaxDensityIncomplete_2(test));
+        System.out.println(densityZone.findMaxDensityIncomplete(test));
         printEdges(test_2);
-        printEdges(randomGraphGen(20,0,20).matrix);
+        Graph randomGraph = randomGraphGen(20, 5, 15);
+        printEdges(randomGraph.matrix);
+
+        densityZone.findMaxDensityZone(randomGraph);
+        densityZone.findMaxDensityIncomplete(randomGraph);
 
     }
 }
