@@ -1,3 +1,5 @@
+package TP1.Project3;
+
 public class main {
 
     public static void main(String[] args) throws Exception {
@@ -9,7 +11,7 @@ public class main {
         System.out.println(tm2.isWord("aaaaaaaa"));
         System.out.println(tm2.isWord("wd"));*/
 
-        TuringMachine td3ex1 = new TuringMachine("./src/machines/td3machine1");
+        TuringMachine td3ex1 = new TuringMachine("./src/TP1/Project3/machines/td3machine1");
         System.out.println(td3ex1.isWord("aaa"));
         System.out.println(td3ex1.isWord("abc"));
         System.out.println(td3ex1.isWord("bbbc"));

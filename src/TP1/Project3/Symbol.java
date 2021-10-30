@@ -1,3 +1,5 @@
+package TP1.Project3;
+
 public class Symbol {
     public final String value;
 

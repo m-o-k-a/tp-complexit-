@@ -1,3 +1,5 @@
+package TP1.Project3;
+
 public class Transition {
     public final Symbol symbolSrc;
     public final State stateSrc;

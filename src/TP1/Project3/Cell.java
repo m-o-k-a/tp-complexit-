@@ -1,3 +1,5 @@
+package TP1.Project3;
+
 public class Cell {
     public Symbol symbol;
     public Cell leftCell;

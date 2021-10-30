@@ -1,3 +1,5 @@
+package TP1.Project3;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -22,26 +24,26 @@ public class TuringMachine {
             for(int i = 0; i<statesValues.length; i++) {
                 states.add(new State(statesValues[i]));
             }
-        }
+        } else { throw new Exception("Missing States Line"); }
         /* Symbols line */
         if((line = reader.readLine()) != null) {
             String[] symbolsValues = line.split(",");
             for(int i = 0; i<symbolsValues.length; i++) {
                 symbols.add(new Symbol(symbolsValues[i]));
             }
-        }
+        } else { throw new Exception("Missing Symbols Line"); }
         /* White Symbol */
         if((line = reader.readLine()) != null) {
             Symbol temp = new Symbol(line);
             if(!symbols.contains(temp)) throw new Exception("White Symbol "+line+" not in Symbol List");
             white = symbols.get(symbols.indexOf(temp));
-        }
+        } else { throw new Exception("Missing White Symbol Line"); }
         /* Initial State */
         if((line = reader.readLine()) != null) {
             State temp = new State(line);
             if(!states.contains(temp)) throw new Exception("Initial State "+line+" not in State List");
             initialState = states.get(states.indexOf(temp));
-        }
+        } else { throw new Exception("Missing Initial State Line"); }
         /* Final States */
         if((line = reader.readLine()) != null) {
             String[] finalStatesValues = line.split(",");
@@ -50,14 +52,14 @@ public class TuringMachine {
                 if(!states.contains(temp)) throw new Exception("Final State "+finalStatesValues[i]+" not in State List");
                 finalStates.add(states.get(states.indexOf(temp)));
             }
-        }
+        } else { throw new Exception("Missing Final State Line"); }
         /* Transitions*/
         while((line = reader.readLine()) != null) {
             String[] newTransitions = line.split(",");
             if(!states.contains(new State(newTransitions[0]))) throw new Exception("State "+newTransitions[0]+" not in State List");
-            //if(!symbols.contains(new Symbol(newTransitions[1]))) throw new Exception("Symbol "+newTransitions[1]+" not in Symbol List");
+            if(!symbols.contains(new Symbol(newTransitions[1]))) throw new Exception("Symbol "+newTransitions[1]+" not in Symbol List");
             if(!states.contains(new State(newTransitions[2]))) throw new Exception("State "+newTransitions[2]+" not in State List");
-            //if(!symbols.contains(new Symbol(newTransitions[3]))) throw new Exception("Symbol "+newTransitions[3]+" not in Symbol List");
+            if(!symbols.contains(new Symbol(newTransitions[3]))) throw new Exception("Symbol "+newTransitions[3]+" not in Symbol List");
             transitions.add(new Transition(new Symbol(newTransitions[1]), new State(newTransitions[0]), new Symbol(newTransitions[3]), new State(newTransitions[2]), newTransitions[4]));
         }
         /* Machine Print */
