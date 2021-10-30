@@ -60,7 +60,9 @@ public class TuringMachine {
             if(!symbols.contains(new Symbol(newTransitions[1]))) throw new Exception("Symbol "+newTransitions[1]+" not in Symbol List");
             if(!states.contains(new State(newTransitions[2]))) throw new Exception("State "+newTransitions[2]+" not in State List");
             if(!symbols.contains(new Symbol(newTransitions[3]))) throw new Exception("Symbol "+newTransitions[3]+" not in Symbol List");
-            transitions.add(new Transition(new Symbol(newTransitions[1]), new State(newTransitions[0]), new Symbol(newTransitions[3]), new State(newTransitions[2]), newTransitions[4]));
+            Transition transition = new Transition(new Symbol(newTransitions[1]), new State(newTransitions[0]), new Symbol(newTransitions[3]), new State(newTransitions[2]), newTransitions[4]);
+            if(transitions.contains(transition)) throw new Exception("Cannot accept non deterministic transitions on: "+transition);
+            transitions.add(transition);
         }
         /* Machine Print */
         System.out.println("TURING MACHINE\n---\nStates "+states+"\nSymbols "+symbols+"\nWhite "+white+"\nInitial State "+initialState

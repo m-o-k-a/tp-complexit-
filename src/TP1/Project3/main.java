@@ -21,5 +21,7 @@ public class main {
         /*TuringMachine bckws = new TuringMachine("./src/machines/backwards-only-a");
         System.out.println(bckws.isWord("a"));*/
 
+        //TuringMachine nondeterminist = new TuringMachine("./src/TP1/Project3/machines/nonDeterminist");
+
     }
 }
