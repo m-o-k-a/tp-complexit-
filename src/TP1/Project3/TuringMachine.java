@@ -69,7 +69,7 @@ public class TuringMachine {
         +"\nFinal states "+finalStates+"\nTransitions: "+transitions+"\n---\n");
     }
 
-    public boolean isWord(String w) {
+    public boolean isWord(String w, boolean verbose) {
         System.out.println("is "+w+" recognized?");
         State currentState = initialState;
         //Construction du ruban
@@ -86,13 +86,13 @@ public class TuringMachine {
             if(!symbols.contains(currentCell.symbol)) return false;
             Transition tempTransition = new Transition(currentCell.symbol, currentState, null, null, "NONE");
             if(!transitions.contains(tempTransition)) {
-                System.out.println(currentCell.ToString());
+                if(verbose) System.out.println(currentCell.ToString());
                 return finalStates.contains(currentState);
             }
             Transition trans = transitions.get(transitions.indexOf(tempTransition));
             currentCell.symbol = trans.symbolDest;
             currentState = trans.stateDest;
-            System.out.println("GOTO: "+trans.stateDest);
+            if(verbose) System.out.println("GOTO: "+trans.stateDest);
             switch(trans.direction) {
                 case "-1":
                     if(currentCell.leftCell == null) {
